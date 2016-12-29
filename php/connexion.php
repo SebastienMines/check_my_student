@@ -1,13 +1,13 @@
 <?php
 /* Connexion à une base ODBC avec l'invocation de pilote */
-$dsn = 'mysql:dbname=bdd01_2017;host=127.0.0.1';
-$user = 'grp01_2017';
-$password = '5B5Dmxp1';
-
-try {
-    $dbh = new PDO($dsn, $user, $password);
-} catch (PDOException $e) {
-    echo 'Connexion échouée : ' . $e->getMessage();
+try
+{
+	$bd = new PDO('mysql:host=localhost;dbname=bdd01_2017', 'root', '');
+	return $bd;
 }
-
+catch (PDOException $e)
+{
+	// On termine le script en affichant le code de l’erreur ainsi que le message
+	die('<p> La connexion a échoué. Erreur['.$e->getCode().'] : '.$e->getMessage().'</p>');
+}
 ?>

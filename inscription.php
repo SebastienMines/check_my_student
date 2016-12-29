@@ -187,47 +187,22 @@
 
 	
 	<!-- SERVICES -->
-	<section id="services">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="section-title">
-						<h1>Services</h1>
-						<span class="st-border"></span>
-					</div>
-				</div>
-
-				<div class="col-md-4 col-sm-6 st-service">
-					<h2><i class="fa fa-desktop"></i> Web Design</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta libero autem, magni veritatis, optio dolor.</p>
-				</div>
-
-				<div class="col-md-4 col-sm-6 st-service">
-					<h2><i class="fa fa-cogs"></i> Web Developement</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta libero autem, magni veritatis, optio dolor.</p>
-				</div>
-
-				<div class="col-md-4 col-sm-6 st-service">
-					<h2><i class="fa fa-code"></i> Custom Development</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta libero autem, magni veritatis, optio dolor.</p>
-				</div>
-
-				<div class="col-md-4 col-sm-6 st-service">
-					<h2><i class="fa fa-dashboard"></i> Super Fast Web</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta libero autem, magni veritatis, optio dolor.</p>
-				</div>
-
-				<div class="col-md-4 col-sm-6 st-service">
-					<h2><i class="fa fa-life-ring"></i> Friendly Support</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta libero autem, magni veritatis, optio dolor.</p>
-				</div>
-
-				<div class="col-md-4 col-sm-6 st-service">
-					<h2><i class="fa fa-weixin"></i> Live Support</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta libero autem, magni veritatis, optio dolor.</p>
-				</div>
-			</div>
-		</div>
+	<section id="inscrit">
+		<?php
+			include 'php/connexion.php';
+			$date_now = new DateTime("now");
+			$d_n = new DateTime($_POST['date_naissance']);
+			$query = $bd->prepare("INSERT INTO users(nom, prenom, date_inscription, email, mdp, date_naissance, is_sponsor, is_eleve) VALUES(:nom, :prenom, :date_inscription, :email, :mdp, :date_naissance, :is_sponsor, :is_eleve)");
+			$query->bindValue(':nom', $_POST['nom']);
+			$query->bindValue(':prenom', $_POST['prenom']);
+			$query->bindValue(':date_inscription', $date_now->format("Y-m-d"));
+			$query->bindValue(':email', $_POST['email']);
+			$query->bindValue(':mdp', $_POST['mdp']);
+			$query->bindValue(':date_naissance', $d_n->format("Y-m-d"));
+			$query->bindValue(':is_sponsor',1);
+			$query->bindValue(':is_eleve', 0);
+			$query->execute();
+		?>
 	</section>
 	<!-- /SERVICES -->
 
